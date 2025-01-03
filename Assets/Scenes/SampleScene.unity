@@ -516,8 +516,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1467f1e26d5caff419e5f518a3b860be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 0}
-  platformCount: 300
+  platformPrefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
+  initialPlatformCount: 20
+  spawnInterval: 1
+  minYDistance: 1
+  maxYDistance: 2
+  platformLifetime: 30
 --- !u!4 &1967285300
 Transform:
   m_ObjectHideFlags: 0
