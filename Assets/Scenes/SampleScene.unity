@@ -156,9 +156,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.35
   m_Material: {fileID: 6200000, guid: fc3d17e7ef7b87642a40c1c1132cd0ca, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -516,7 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1467f1e26d5caff419e5f518a3b860be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
+  platformPrefab: {fileID: 0}
   platformCount: 300
 --- !u!4 &1967285300
 Transform:
