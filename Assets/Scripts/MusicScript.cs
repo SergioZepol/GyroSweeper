@@ -80,7 +80,7 @@ public class MusicScript : MonoBehaviour
             case "MainMenuScene":
                 clipToPlay = menuMusic;
                 break;
-            case "SampleScene":
+            case "GameScene":
                 // Crear una lista de los clips de música del juego
                 AudioClip[] gameMusicClips = new AudioClip[]
                 {

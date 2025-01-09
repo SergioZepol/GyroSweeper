@@ -22,7 +22,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal") * moveSpeed;
+        // Detectar si estás en móvil o en ordenador
+        if (Application.isMobilePlatform)
+        {
+            // Usar acelerómetro para el movimiento en móviles
+            moveX = Input.acceleration.x * moveSpeed;
+        }
+        else
+        {
+            // Usar Input.GetAxis en ordenadores
+            moveX = Input.GetAxis("Horizontal") * moveSpeed;
+        }
 
         // Flip the character based on the direction
         if (moveX > 0)
