@@ -541,7 +541,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Leaderboard
+  m_text: scores
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d96722da47a8c8149b76b1f6d6e5e5f6, type: 2}
   m_sharedMaterial: {fileID: -3013631247690033034, guid: d96722da47a8c8149b76b1f6d6e5e5f6, type: 2}
@@ -568,8 +568,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
