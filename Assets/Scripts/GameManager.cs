@@ -5,12 +5,13 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject platformPrefab;
+    public GameObject Ground;
     public int initialPlatformCount = 20; // Cantidad de plataformas iniciales
     public float spawnInterval = 0.1f; // Intervalo más rápido para generar plataformas
     public float minYDistance = 1f; // Distancia mínima vertical entre plataformas
     public float maxYDistance = 2f; // Distancia máxima vertical entre plataformas
 
-    private float lastSpawnY = 0f; // Última posición Y donde se generó una plataforma
+    private float lastSpawnY = -3.5f; // Última posición Y donde se generó una plataforma
     private Transform cameraTransform;
     private float screenHalfWidth; // Mitad del ancho de la pantalla en unidades del mundo
     private float despawnYThreshold = -10f; // Margen para eliminar plataformas fuera de la cámara
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
 
         // Precarga de plataformas iniciales
         PreloadPlatforms();
+        activePlatforms.Add(Ground);
     }
 
     void Update()
