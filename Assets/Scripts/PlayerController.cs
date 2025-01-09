@@ -90,4 +90,12 @@ public class PlayerController : MonoBehaviour
         // Cargar la escena del menú principal
         SceneManager.LoadScene("MainMenuScene");
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Daño") && collision.relativeVelocity.y >= 0)
+        {
+            LoadMainMenu();
+        }
+    }
 }

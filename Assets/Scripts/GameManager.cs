@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject platformPrefab;
+    public GameObject platform1_Prefab;
+    public GameObject platform1_1_Prefab;
+    public GameObject platform1_2_Prefab;
+    public GameObject platform1_3_Prefab;
     public GameObject Ground;
     public int initialPlatformCount = 20; // Cantidad de plataformas iniciales
     public float spawnInterval = 0.1f; // Intervalo más rápido para generar plataformas
@@ -17,7 +20,7 @@ public class GameManager : MonoBehaviour
     private float despawnYThreshold = -10f; // Margen para eliminar plataformas fuera de la cámara
     private List<GameObject> activePlatforms = new List<GameObject>(); // Lista de plataformas activas
 
-    void Start()
+    private void Start()
     {
         cameraTransform = Camera.main.transform;
         float screenHeight = 2f * Camera.main.orthographicSize; // Altura visible
@@ -28,7 +31,7 @@ public class GameManager : MonoBehaviour
         activePlatforms.Add(Ground);
     }
 
-    void Update()
+    private void Update()
     {
         // Genera plataformas cuando el jugador se acerca a la parte superior
         while (lastSpawnY < cameraTransform.position.y + 15f)
@@ -40,7 +43,7 @@ public class GameManager : MonoBehaviour
         CleanupPlatforms();
     }
 
-    void PreloadPlatforms()
+    private void PreloadPlatforms()
     {
         for (int i = 0; i < initialPlatformCount; i++)
         {
@@ -48,13 +51,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SpawnPlatform()
+    private void SpawnPlatform()
     {
         Vector3 spawnPosition = new Vector3();
         spawnPosition.y = lastSpawnY + Random.Range(minYDistance, maxYDistance);
 
         // Obtener el tamaño de la plataforma
-        float platformWidth = platformPrefab.GetComponent<Renderer>().bounds.size.x;
+        float platformWidth = platform1_Prefab.GetComponent<Renderer>().bounds.size.x;
 
         // Ajustar los límites de generación horizontal para permitir "a ras"
         float minX = -screenHalfWidth + (platformWidth / 2); // Límite izquierdo
@@ -63,13 +66,16 @@ public class GameManager : MonoBehaviour
         // Generar posición X dentro de los límites ajustados
         spawnPosition.x = Random.Range(minX, maxX);
 
-        GameObject platform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+        // Seleccionar una plataforma aleatoriamente según la probabilidad
+        GameObject selectedPlatform = SelectRandomPlatform();
+
+        GameObject platform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
         activePlatforms.Add(platform);
 
         lastSpawnY = spawnPosition.y;
     }
 
-    void CleanupPlatforms()
+    private void CleanupPlatforms()
     {
         for (int i = activePlatforms.Count - 1; i >= 0; i--)
         {
@@ -78,6 +84,29 @@ public class GameManager : MonoBehaviour
                 Destroy(activePlatforms[i]);
                 activePlatforms.RemoveAt(i);
             }
+        }
+    }
+
+    private GameObject SelectRandomPlatform()
+    {
+        // Probabilidades: 70% para platform1_Prefab, 10% para cada plataforma con pinchos
+        float randomValue = Random.value;
+
+        if (randomValue < 0.7f) // 70% de probabilidad
+        {
+            return platform1_Prefab;
+        }
+        else if (randomValue < 0.8f) // 10% de probabilidad adicional
+        {
+            return platform1_1_Prefab;
+        }
+        else if (randomValue < 0.9f) // 10% de probabilidad adicional
+        {
+            return platform1_2_Prefab;
+        }
+        else // 10% de probabilidad restante
+        {
+            return platform1_3_Prefab;
         }
     }
 }
