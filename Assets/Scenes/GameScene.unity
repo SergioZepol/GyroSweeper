@@ -632,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
+  fanLiftForce: 20
   rb: {fileID: 0}
 --- !u!95 &217688315
 Animator:
@@ -3698,6 +3699,7 @@ MonoBehaviour:
   platform1_1_Prefab: {fileID: 2703955526101432938, guid: 8984dea2d8eb0bf4da25aae09555e422, type: 3}
   platform1_2_Prefab: {fileID: 2703955526101432938, guid: 4fca5235e89aa884a8a4f535844ad419, type: 3}
   platform1_3_Prefab: {fileID: 2703955526101432938, guid: 869aaeceb631d9b4898700a262d6fc0e, type: 3}
+  fanPlatform_Prefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
   Ground: {fileID: 1593230087}
   initialPlatformCount: 20
   spawnInterval: 1
@@ -3768,6 +3770,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148266559255841849, guid: de9153498c118414b9088476a974d5dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8984955772889870103, guid: de9153498c118414b9088476a974d5dd, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

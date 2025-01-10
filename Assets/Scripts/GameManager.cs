@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject platform1_1_Prefab;
     public GameObject platform1_2_Prefab;
     public GameObject platform1_3_Prefab;
+    public GameObject fanPlatform_Prefab;
     public GameObject Ground;
     public int initialPlatformCount = 20; // Cantidad de plataformas iniciales
     public float spawnInterval = 0.1f; // Intervalo más rápido para generar plataformas
@@ -92,21 +93,25 @@ public class GameManager : MonoBehaviour
         // Probabilidades: 70% para platform1_Prefab, 10% para cada plataforma con pinchos
         float randomValue = Random.value;
 
-        if (randomValue < 0.7f) // 70% de probabilidad
+        if (randomValue < 0.6f) // 70% de probabilidad
         {
             return platform1_Prefab;
         }
-        else if (randomValue < 0.8f) // 10% de probabilidad adicional
+        else if (randomValue < 0.7f) // 10% de probabilidad adicional
         {
             return platform1_1_Prefab;
         }
-        else if (randomValue < 0.9f) // 10% de probabilidad adicional
+        else if (randomValue < 0.8f) // 10% de probabilidad adicional
         {
             return platform1_2_Prefab;
         }
-        else // 10% de probabilidad restante
+        else if (randomValue < 0.9f) // 10% de probabilidad adicional
         {
             return platform1_3_Prefab;
+        }
+        else
+        {
+            return fanPlatform_Prefab;
         }
     }
 }
