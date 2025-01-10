@@ -3696,6 +3696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platform1_Prefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
+  platform1_Trampoline_Prefab: {fileID: 7093744767675706617, guid: 8d7f47396dafcd640a1203f3de763c0f, type: 3}
   platform1_1_Prefab: {fileID: 2703955526101432938, guid: 8984dea2d8eb0bf4da25aae09555e422, type: 3}
   platform1_2_Prefab: {fileID: 2703955526101432938, guid: 4fca5235e89aa884a8a4f535844ad419, type: 3}
   platform1_3_Prefab: {fileID: 2703955526101432938, guid: 869aaeceb631d9b4898700a262d6fc0e, type: 3}
@@ -3707,7 +3708,7 @@ MonoBehaviour:
   platform3_1_Prefab: {fileID: 3287567797614780378, guid: 7241a2798f9d45547a349f80d6d82a00, type: 3}
   platform3_2_Prefab: {fileID: 3287567797614780378, guid: 5e58b3ac10db8ea4f852848df3dc63ef, type: 3}
   platform3_3_Prefab: {fileID: 3287567797614780378, guid: 0905861e3a973a541b7aa6d29ed479a7, type: 3}
-  fanPlatform_Prefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
+  fanPlatform_Prefab: {fileID: 0}
   Ground: {fileID: 1593230087}
   initialPlatformCount: 20
   spawnInterval: 1

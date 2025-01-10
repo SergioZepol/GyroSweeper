@@ -26,7 +26,14 @@ public class Platform : MonoBehaviour
             if (rb != null)
             {
                 // Ajusta la velocidad vertical directamente para evitar acumulación
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                if (this.gameObject.tag == "Trampoline")
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce*1.5f);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                }
             }
         }
     }

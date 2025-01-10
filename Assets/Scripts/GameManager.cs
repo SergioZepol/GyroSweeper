@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject platform1_Prefab;
+    public GameObject platform1_Trampoline_Prefab;
     public GameObject platform1_1_Prefab;
     public GameObject platform1_2_Prefab;
     public GameObject platform1_3_Prefab;
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            return fanPlatform_Prefab;
+            return platform1_Trampoline_Prefab;
         }
     }
 
