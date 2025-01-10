@@ -3699,6 +3699,14 @@ MonoBehaviour:
   platform1_1_Prefab: {fileID: 2703955526101432938, guid: 8984dea2d8eb0bf4da25aae09555e422, type: 3}
   platform1_2_Prefab: {fileID: 2703955526101432938, guid: 4fca5235e89aa884a8a4f535844ad419, type: 3}
   platform1_3_Prefab: {fileID: 2703955526101432938, guid: 869aaeceb631d9b4898700a262d6fc0e, type: 3}
+  platform2_Prefab: {fileID: 4808833431146143322, guid: 3e075fb25a48eb74798e73ef3152cc96, type: 3}
+  platform2_1_Prefab: {fileID: 4808833431146143322, guid: 543a9e29cc101ac4eb414e70f7819a28, type: 3}
+  platform2_2_Prefab: {fileID: 4808833431146143322, guid: d73a6a60dd3b9ab49abc1c1967180d3e, type: 3}
+  platform2_3_Prefab: {fileID: 4808833431146143322, guid: 86ae398fac5bc9646859b0a3f95e3889, type: 3}
+  platform3_Prefab: {fileID: 3287567797614780378, guid: 216e5b03cfad61b44ae0eb405bab8a8e, type: 3}
+  platform3_1_Prefab: {fileID: 3287567797614780378, guid: 7241a2798f9d45547a349f80d6d82a00, type: 3}
+  platform3_2_Prefab: {fileID: 3287567797614780378, guid: 5e58b3ac10db8ea4f852848df3dc63ef, type: 3}
+  platform3_3_Prefab: {fileID: 3287567797614780378, guid: 0905861e3a973a541b7aa6d29ed479a7, type: 3}
   fanPlatform_Prefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
   Ground: {fileID: 1593230087}
   initialPlatformCount: 20

@@ -8,6 +8,14 @@ public class GameManager : MonoBehaviour
     public GameObject platform1_1_Prefab;
     public GameObject platform1_2_Prefab;
     public GameObject platform1_3_Prefab;
+    public GameObject platform2_Prefab;
+    public GameObject platform2_1_Prefab;
+    public GameObject platform2_2_Prefab;
+    public GameObject platform2_3_Prefab;
+    public GameObject platform3_Prefab;
+    public GameObject platform3_1_Prefab;
+    public GameObject platform3_2_Prefab;
+    public GameObject platform3_3_Prefab;
     public GameObject fanPlatform_Prefab;
     public GameObject Ground;
     public int initialPlatformCount = 20; // Cantidad de plataformas iniciales
@@ -90,28 +98,50 @@ public class GameManager : MonoBehaviour
 
     private GameObject SelectRandomPlatform()
     {
-        // Probabilidades: 70% para platform1_Prefab, 10% para cada plataforma con pinchos
-        float randomValue = Random.value;
+        // Seleccionar aleatoriamente entre platform1, platform2 y platform3 con probabilidades iguales (33.3%)
+        float randomPlatformGroup = Random.value;
 
-        if (randomValue < 0.6f) // 70% de probabilidad
+        if (randomPlatformGroup < 0.30f)
         {
-            return platform1_Prefab;
+            // Seleccionar una variante de platform1
+            return SelectPlatformVariant(platform1_Prefab, platform1_1_Prefab, platform1_2_Prefab, platform1_3_Prefab);
         }
-        else if (randomValue < 0.7f) // 10% de probabilidad adicional
+        else if (randomPlatformGroup < 0.60f)
         {
-            return platform1_1_Prefab;
+            // Seleccionar una variante de platform2
+            return SelectPlatformVariant(platform2_Prefab, platform2_1_Prefab, platform2_2_Prefab, platform2_3_Prefab);
         }
-        else if (randomValue < 0.8f) // 10% de probabilidad adicional
+        else if (randomPlatformGroup < 0.90f)
         {
-            return platform1_2_Prefab;
-        }
-        else if (randomValue < 0.9f) // 10% de probabilidad adicional
-        {
-            return platform1_3_Prefab;
+            // Seleccionar una variante de platform3
+            return SelectPlatformVariant(platform3_Prefab, platform3_1_Prefab, platform3_2_Prefab, platform3_3_Prefab);
         }
         else
         {
             return fanPlatform_Prefab;
+        }
+    }
+
+    private GameObject SelectPlatformVariant(GameObject basic, GameObject variant1, GameObject variant2, GameObject variant3)
+    {
+        // Probabilidades: 70% básica, 10% variante1, 10% variante2, 10% variante3
+        float randomValue = Random.value;
+
+        if (randomValue < 0.7f)
+        {
+            return basic; // 70% de probabilidad
+        }
+        else if (randomValue < 0.8f)
+        {
+            return variant1; // 10% de probabilidad
+        }
+        else if (randomValue < 0.9f)
+        {
+            return variant2; // 10% de probabilidad
+        }
+        else
+        {
+            return variant3; // 10% de probabilidad
         }
     }
 }
