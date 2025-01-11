@@ -4475,6 +4475,8 @@ MonoBehaviour:
     probability: 0.15
   - prefab: {fileID: 1545927132147468279, guid: c9b29e49a9b441049bb02064c688a065, type: 3}
     probability: 0.15
+  - prefab: {fileID: 1751879420179160715, guid: 8430dcb73cd3464428f0cd332aff30bf, type: 3}
+    probability: 0.15
   initialPlatformCount: 20
   spawnInterval: 1
   minYDistance: 1

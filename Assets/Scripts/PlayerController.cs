@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float fanLiftForce = 20f; // Fuerza de elevación del ventilador
     public Rigidbody2D rb;
     public HUDScript hud;
+    private bool dead = false;
 
     private float moveX;
     private Vector3 originalScale;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        dead = false;
         Time.timeScale = 1f;
         rb = GetComponent<Rigidbody2D>();
         originalScale = transform.localScale; // Guardamos el tamaño original
@@ -38,33 +40,36 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Detectar si estás en móvil o en ordenador
-        if (Application.isMobilePlatform)
+        if (!dead)
         {
-            moveX = Input.acceleration.x * moveSpeed;
-        }
-        else
-        {
-            moveX = Input.GetAxis("Horizontal") * moveSpeed;
-        }
+            // Detectar si estás en móvil o en ordenador
+            if (Application.isMobilePlatform)
+            {
+                moveX = Input.acceleration.x * moveSpeed;
+            }
+            else
+            {
+                moveX = Input.GetAxis("Horizontal") * moveSpeed;
+            }
 
-        // Flip the character based on the direction
-        if (moveX > 0)
-        {
-            transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+            // Flip the character based on the direction
+            if (moveX > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+            }
+            else if (moveX < 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
+            }
+
+            CheckScreenBounds(); // Verificar si el personaje se sale de los límites
+
+            // Detectar si el usuario está soplando al micrófono
+            isBlowing = CheckBlowing();
+
+            // Detectar clic o toque sobre objetos "Fan"
+            DetectFanClickOrTouch();
         }
-        else if (moveX < 0)
-        {
-            transform.localScale = new Vector3(-Mathf.Abs(originalScale.x), originalScale.y, originalScale.z);
-        }
-
-        CheckScreenBounds(); // Verificar si el personaje se sale de los límites
-
-        // Detectar si el usuario está soplando al micrófono
-        isBlowing = CheckBlowing();
-
-        // Detectar clic o toque sobre objetos "Fan"
-        DetectFanClickOrTouch();
     }
 
     private void FixedUpdate()
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
     private void Dead()
     {
+        dead = true;
         hud.DeadScreen();
     }
 

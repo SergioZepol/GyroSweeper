@@ -14,6 +14,10 @@ public class Platform : MonoBehaviour
     private Camera mainCamera; // Referencia a la cámara principal
     private bool movingRight = true; // Indica si la plataforma se mueve a la derecha o izquierda
 
+    // Variables para plataformas que caen
+    public bool isFallingPlatform; // Identifica si esta es una plataforma que cae
+    private bool isFalling = false; // Indica si la plataforma ya está cayendo
+
     void Start()
     {
         zorro = GameObject.Find("Fox"); // Cambia "Zorro" por el nombre exacto del GameObject en tu escena.
@@ -27,6 +31,11 @@ public class Platform : MonoBehaviour
         {
             MovePlatform();
             CheckScreenLimits(); // Verifica los límites de la pantalla
+        }
+
+        if (isFalling)
+        {
+            CheckOutOfScreen(); // Verifica si la plataforma salió de la pantalla para destruirla
         }
     }
 
@@ -63,6 +72,16 @@ public class Platform : MonoBehaviour
         }
     }
 
+    private void CheckOutOfScreen()
+    {
+        // Verifica si la plataforma está fuera de los márgenes de la pantalla
+        Vector3 screenPosition = mainCamera.WorldToViewportPoint(transform.position);
+
+        if (screenPosition.y < 0)
+        {
+            Destroy(gameObject); // Destruye la plataforma cuando sale de la pantalla
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -82,7 +101,19 @@ public class Platform : MonoBehaviour
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 }
+                if (isFallingPlatform && !isFalling)
+                {
+                    StartFalling();
+                }
             }
         }
+    }
+
+    private void StartFalling()
+    {
+        isFalling = true; // Marca la plataforma como cayendo
+        Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>(); // Agrega un Rigidbody2D para simular la caída
+        rb.gravityScale = 2f; // Ajusta la gravedad para una caída más rápida
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Congela la rotación para evitar que gire
     }
 }
