@@ -13,7 +13,9 @@ public class HUDScript : MonoBehaviour
     //Score text
     private Transform playerTransform; // Transform del jugador
     public GameObject text; // Objeto que contiene el TextMeshProUGUI
+    public GameObject deadText;
     private TextMeshProUGUI textCanvas; // Referencia al componente TextMeshProUGUI
+    private TextMeshProUGUI textDead;
     public GameObject Fox; // Referencia al jugador
     private float initialY; // Posición inicial del jugador en Y
     private int highestScore = 0; // Puntaje más alto alcanzado
@@ -35,10 +37,14 @@ public class HUDScript : MonoBehaviour
     private float savedMusicVolume;
     private float savedSfxVolume;
 
+    //Game Over
+    public GameObject deadObject;
+
     private void Start()
     {
         // Obtén la referencia al componente TextMeshProUGUI
         textCanvas = text.GetComponent<TextMeshProUGUI>();
+        textDead = deadText.GetComponent<TextMeshProUGUI>();
 
         // Obtén la referencia al Transform del jugador
         playerTransform = Fox.GetComponent<Transform>();
@@ -80,11 +86,29 @@ public class HUDScript : MonoBehaviour
         paused = false;
         Time.timeScale = 1f;
     }
+
+    public void DeadScreen()
+    {
+        Time.timeScale = 0f;
+        pauseButton.SetActive(false);
+        textCanvas.gameObject.SetActive(false);
+        deadObject.SetActive(true);
+        textDead.text = "Your Score\n was: " + highestScore;
+    }
     public void PlayMenu()
     {
-        Time.timeScale = 1f;
         SfxScript.TriggerSfx("SfxButton1");
         SceneManager.LoadScene("MainMenuScene");
+        Time.timeScale = 1f;
+    }
+
+    public void Replay()
+    {
+        SfxScript.TriggerSfx("SfxButton1");
+        pauseButton.SetActive(true);
+        textCanvas.gameObject.SetActive(true);
+        deadObject.SetActive(false);
+        SceneManager.LoadScene("GameScene");
     }
     public void Mute()
     {

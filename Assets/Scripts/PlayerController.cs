@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 10f;
     public float fanLiftForce = 20f; // Fuerza de elevación del ventilador
     public Rigidbody2D rb;
+    public HUDScript hud;
 
     private float moveX;
     private Vector3 originalScale;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        Time.timeScale = 1f;
         rb = GetComponent<Rigidbody2D>();
         originalScale = transform.localScale; // Guardamos el tamaño original
 
@@ -99,20 +101,20 @@ public class PlayerController : MonoBehaviour
 
         if (screenPosition.y < 0)
         {
-            LoadMainMenu();
+            Dead();
         }
     }
 
-    private void LoadMainMenu()
+    private void Dead()
     {
-        SceneManager.LoadScene("MainMenuScene");
+        hud.DeadScreen();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Daño") && collision.relativeVelocity.y >= 0)
         {
-            LoadMainMenu();
+            Dead();
         }
     }
 
