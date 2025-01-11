@@ -4,21 +4,14 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject platform1_Prefab;
-    public GameObject platform1_Trampoline_Prefab;
-    public GameObject platform1_1_Prefab;
-    public GameObject platform1_2_Prefab;
-    public GameObject platform1_3_Prefab;
-    public GameObject platform2_Prefab;
-    public GameObject platform2_1_Prefab;
-    public GameObject platform2_2_Prefab;
-    public GameObject platform2_3_Prefab;
-    public GameObject platform3_Prefab;
-    public GameObject platform3_1_Prefab;
-    public GameObject platform3_2_Prefab;
-    public GameObject platform3_3_Prefab;
-    public GameObject fanPlatform_Prefab;
-    public GameObject Ground;
+    [System.Serializable]
+    public struct PlatformPrefab
+    {
+        public GameObject prefab;
+        public float probability; // Probabilidad de aparición
+    }
+
+    public List<PlatformPrefab> platforms; // Lista de prefabs con sus probabilidades
     public int initialPlatformCount = 20; // Cantidad de plataformas iniciales
     public float spawnInterval = 0.1f; // Intervalo más rápido para generar plataformas
     public float minYDistance = 1f; // Distancia mínima vertical entre plataformas
@@ -38,7 +31,6 @@ public class GameManager : MonoBehaviour
 
         // Precarga de plataformas iniciales
         PreloadPlatforms();
-        activePlatforms.Add(Ground);
     }
 
     private void Update()
@@ -67,7 +59,7 @@ public class GameManager : MonoBehaviour
         spawnPosition.y = lastSpawnY + Random.Range(minYDistance, maxYDistance);
 
         // Obtener el tamaño de la plataforma
-        float platformWidth = platform1_Prefab.GetComponent<Renderer>().bounds.size.x;
+        float platformWidth = platforms[0].prefab.GetComponent<Renderer>().bounds.size.x;
 
         // Ajustar los límites de generación horizontal para permitir "a ras"
         float minX = -screenHalfWidth + (platformWidth / 2); // Límite izquierdo
@@ -99,50 +91,24 @@ public class GameManager : MonoBehaviour
 
     private GameObject SelectRandomPlatform()
     {
-        // Seleccionar aleatoriamente entre platform1, platform2 y platform3 con probabilidades iguales (33.3%)
-        float randomPlatformGroup = Random.value;
+        float totalProbability = 0f;
+        foreach (var platform in platforms)
+        {
+            totalProbability += platform.probability;
+        }
 
-        if (randomPlatformGroup < 0.30f)
-        {
-            // Seleccionar una variante de platform1
-            return SelectPlatformVariant(platform1_Prefab, platform1_1_Prefab, platform1_2_Prefab, platform1_3_Prefab);
-        }
-        else if (randomPlatformGroup < 0.60f)
-        {
-            // Seleccionar una variante de platform2
-            return SelectPlatformVariant(platform2_Prefab, platform2_1_Prefab, platform2_2_Prefab, platform2_3_Prefab);
-        }
-        else if (randomPlatformGroup < 0.90f)
-        {
-            // Seleccionar una variante de platform3
-            return SelectPlatformVariant(platform3_Prefab, platform3_1_Prefab, platform3_2_Prefab, platform3_3_Prefab);
-        }
-        else
-        {
-            return platform1_Trampoline_Prefab;
-        }
-    }
+        float randomValue = Random.value * totalProbability;
+        float cumulativeProbability = 0f;
 
-    private GameObject SelectPlatformVariant(GameObject basic, GameObject variant1, GameObject variant2, GameObject variant3)
-    {
-        // Probabilidades: 70% básica, 10% variante1, 10% variante2, 10% variante3
-        float randomValue = Random.value;
+        foreach (var platform in platforms)
+        {
+            cumulativeProbability += platform.probability;
+            if (randomValue <= cumulativeProbability)
+            {
+                return platform.prefab;
+            }
+        }
 
-        if (randomValue < 0.7f)
-        {
-            return basic; // 70% de probabilidad
-        }
-        else if (randomValue < 0.8f)
-        {
-            return variant1; // 10% de probabilidad
-        }
-        else if (randomValue < 0.9f)
-        {
-            return variant2; // 10% de probabilidad
-        }
-        else
-        {
-            return variant3; // 10% de probabilidad
-        }
+        return platforms[0].prefab; // Retorno por defecto si no se encuentra ninguno
     }
 }
