@@ -69,6 +69,29 @@ public class HUDScript : MonoBehaviour
         }
     }
 
+    private void SaveScore(int score)
+    {
+        // Cargar los puntajes existentes
+        int[] scores = new int[5];
+        for (int i = 0; i < 5; i++)
+        {
+            scores[i] = PlayerPrefs.GetInt($"HighScore{i}", 0);
+        }
+
+        // Agregar el nuevo puntaje y ordenar
+        scores[4] = score;
+        System.Array.Sort(scores);
+        System.Array.Reverse(scores);
+
+        // Guardar los 5 mejores puntajes
+        for (int i = 0; i < 5; i++)
+        {
+            PlayerPrefs.SetInt($"HighScore{i}", scores[i]);
+        }
+
+        PlayerPrefs.Save();
+    }
+
     public void Pause()
     {
         SfxScript.TriggerSfx("SfxButton1");
@@ -93,8 +116,13 @@ public class HUDScript : MonoBehaviour
         pauseButton.SetActive(false);
         textCanvas.gameObject.SetActive(false);
         deadObject.SetActive(true);
+
+        // Guarda el puntaje actual
+        SaveScore(highestScore);
+
         textDead.text = "Your Score\n was: " + highestScore;
     }
+
     public void PlayMenu()
     {
         SfxScript.TriggerSfx("SfxButton1");
