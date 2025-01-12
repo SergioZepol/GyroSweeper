@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Platform : MonoBehaviour
@@ -17,6 +18,7 @@ public class Platform : MonoBehaviour
     // Variables para plataformas que caen
     public bool isFallingPlatform; // Identifica si esta es una plataforma que cae
     private bool isFalling = false; // Indica si la plataforma ya está cayendo
+    private bool animada = false;
 
     // Variables de audio
     public AudioSource audioSource; // Fuente de audio
@@ -44,6 +46,12 @@ public class Platform : MonoBehaviour
         // Controla el sonido de "helix"
         if (isFallingPlatform)
         {
+            if (!animada)
+            {
+                Animator platformAnimator = this.GetComponent<Animator>();
+                platformAnimator.SetTrigger("Idle");
+                animada = true;
+            }
             HandleHelixSfx();
         }
     }
@@ -93,6 +101,8 @@ public class Platform : MonoBehaviour
                 // Ajusta la velocidad vertical directamente para evitar acumulación
                 if (this.gameObject.tag == "Trampoline")
                 {
+                    Animator platformAnimator = this.GetComponent<Animator>();
+                    platformAnimator.SetTrigger("IsJumping");
                     SfxScript.TriggerSfx("SfxTrampoline");
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce * 1.5f);
                 }
