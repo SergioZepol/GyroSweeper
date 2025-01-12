@@ -8,6 +8,7 @@ TagManager:
   - Fan
   - FanAir
   - Trampoline
+  - "Da\xF1oMuerte"
   layers:
   - Default
   - TransparentFX
