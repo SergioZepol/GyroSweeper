@@ -32,11 +32,6 @@ public class Platform : MonoBehaviour
             MovePlatform();
             CheckScreenLimits(); // Verifica los límites de la pantalla
         }
-
-        if (isFalling)
-        {
-            CheckOutOfScreen(); // Verifica si la plataforma salió de la pantalla para destruirla
-        }
     }
 
     private void MovePlatform()
@@ -69,17 +64,6 @@ public class Platform : MonoBehaviour
         else if (screenPosition.x < margin)
         {
             movingRight = true;
-        }
-    }
-
-    private void CheckOutOfScreen()
-    {
-        // Verifica si la plataforma está fuera de los márgenes de la pantalla
-        Vector3 screenPosition = mainCamera.WorldToViewportPoint(transform.position);
-
-        if (screenPosition.y < 0)
-        {
-            Destroy(gameObject); // Destruye la plataforma cuando sale de la pantalla
         }
     }
 

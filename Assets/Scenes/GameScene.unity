@@ -3758,7 +3758,7 @@ GameObject:
   - component: {fileID: 1724503227}
   - component: {fileID: 1724503226}
   m_Layer: 5
-  m_Name: Options Text
+  m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
