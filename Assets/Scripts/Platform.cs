@@ -6,7 +6,9 @@ public class Platform : MonoBehaviour
 {
     public float jumpForce = 10f; // Altura fija del salto
     public GameObject zorro; // Arrastra el objeto "Zorro" aquí en el inspector.
+    public GameObject trampoline;
     private Animator zorroAnimator;
+    private Animator platformAnimator;
 
     // Variables para el movimiento lateral
     public bool isMovingPlatform; // Activa si esta plataforma debe moverse
@@ -21,6 +23,7 @@ public class Platform : MonoBehaviour
     void Start()
     {
         zorro = GameObject.Find("Fox"); // Cambia "Zorro" por el nombre exacto del GameObject en tu escena.
+        trampoline = GameObject.FindGameObjectWithTag("Trampoline");
         zorroAnimator = zorro.GetComponent<Animator>();
         mainCamera = Camera.main; // Obtiene la referencia a la cámara principal
     }
@@ -32,6 +35,10 @@ public class Platform : MonoBehaviour
             MovePlatform();
             CheckScreenLimits(); // Verifica los límites de la pantalla
         }
+
+        trampoline = GameObject.FindGameObjectWithTag("Trampoline");
+        platformAnimator = trampoline.GetComponent<Animator>();
+
     }
 
     private void MovePlatform()
@@ -80,6 +87,7 @@ public class Platform : MonoBehaviour
                 if (this.gameObject.tag == "Trampoline")
                 {
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce * 1.5f);
+                    platformAnimator.SetTrigger("IsJumping");
                 }
                 else
                 {
@@ -87,6 +95,7 @@ public class Platform : MonoBehaviour
                 }
                 if (isFallingPlatform && !isFalling)
                 {
+
                     StartFalling();
                 }
             }
