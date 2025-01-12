@@ -117,9 +117,6 @@ public class HUDScript : MonoBehaviour
         textCanvas.gameObject.SetActive(false);
         deadObject.SetActive(true);
 
-        // Guarda el puntaje actual
-        SaveScore(highestScore);
-
         textDead.text = "Your Score\n was: " + highestScore;
     }
 
@@ -141,6 +138,10 @@ public class HUDScript : MonoBehaviour
         textCanvas.gameObject.SetActive(true);
         deadObject.SetActive(false);
         SceneManager.LoadScene("GameScene");
+
+        // Guarda el puntaje actual
+        SaveScore(highestScore);
+
     }
     public void Mute()
     {
