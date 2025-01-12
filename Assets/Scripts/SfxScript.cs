@@ -10,6 +10,11 @@ public class SfxScript : MonoBehaviour
 
     // Clips de efectos de sonido
     public AudioClip sfxButton1;
+    public AudioClip sfxDead;
+    public AudioClip sfxJump;
+    public AudioClip sfxTrampoline;
+    public AudioClip sfxFalling;
+    public AudioClip sfxHelix;
 
     // Evento para reproducir efectos de sonido
     public static event Action<string> OnPlaySfx;
@@ -67,6 +72,21 @@ public class SfxScript : MonoBehaviour
         {
             case "SfxButton1":
                 clipToPlay = sfxButton1;
+                break;
+            case "SfxJump":
+                clipToPlay = sfxJump;
+                break;
+            case "SfxDead":
+                clipToPlay = sfxDead;
+                break;
+            case "SfxTrampoline":
+                clipToPlay = sfxTrampoline;
+                break;
+            case "SfxHelix":
+                clipToPlay = sfxHelix;
+                break;
+            case "SfxFalling":
+                clipToPlay = sfxFalling;
                 break;
             default:
                 Debug.LogWarning("Efecto de sonido no encontrado");

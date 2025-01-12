@@ -53,7 +53,6 @@ public class OptionsScene : MonoBehaviour
             MuteObject.SetActive(true);
         }
     }
-
     private void Awake()
     {
         if (PlayerPrefs.HasKey("masterVolumen") || PlayerPrefs.HasKey("musicVolumen") || PlayerPrefs.HasKey("sfxVolumen"))

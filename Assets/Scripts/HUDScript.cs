@@ -39,6 +39,7 @@ public class HUDScript : MonoBehaviour
 
     //Game Over
     public GameObject deadObject;
+    public AudioClip deadMusic;
 
     private void Start()
     {
@@ -113,6 +114,7 @@ public class HUDScript : MonoBehaviour
     public void DeadScreen()
     {
         Time.timeScale = 0f;
+        MusicScript.TriggerMusic(deadMusic);
         pauseButton.SetActive(false);
         textCanvas.gameObject.SetActive(false);
         deadObject.SetActive(true);

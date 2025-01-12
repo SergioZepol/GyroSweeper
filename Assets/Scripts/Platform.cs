@@ -6,9 +6,7 @@ public class Platform : MonoBehaviour
 {
     public float jumpForce = 10f; // Altura fija del salto
     public GameObject zorro; // Arrastra el objeto "Zorro" aquí en el inspector.
-    public GameObject trampoline;
     private Animator zorroAnimator;
-    private Animator platformAnimator;
 
     // Variables para el movimiento lateral
     public bool isMovingPlatform; // Activa si esta plataforma debe moverse
@@ -20,12 +18,19 @@ public class Platform : MonoBehaviour
     public bool isFallingPlatform; // Identifica si esta es una plataforma que cae
     private bool isFalling = false; // Indica si la plataforma ya está cayendo
 
+    // Variables de audio
+    public AudioSource audioSource; // Fuente de audio
+
     void Start()
     {
         zorro = GameObject.Find("Fox"); // Cambia "Zorro" por el nombre exacto del GameObject en tu escena.
-        trampoline = GameObject.FindGameObjectWithTag("Trampoline");
         zorroAnimator = zorro.GetComponent<Animator>();
         mainCamera = Camera.main; // Obtiene la referencia a la cámara principal
+        if (isFallingPlatform)
+        {
+            audioSource = this.GetComponent<AudioSource>();
+            audioSource.Play();
+        }
     }
 
     void Update()
@@ -36,9 +41,11 @@ public class Platform : MonoBehaviour
             CheckScreenLimits(); // Verifica los límites de la pantalla
         }
 
-        trampoline = GameObject.FindGameObjectWithTag("Trampoline");
-        platformAnimator = trampoline.GetComponent<Animator>();
-
+        // Controla el sonido de "helix"
+        if (isFallingPlatform)
+        {
+            HandleHelixSfx();
+        }
     }
 
     private void MovePlatform()
@@ -79,15 +86,15 @@ public class Platform : MonoBehaviour
         if (collision.relativeVelocity.y <= 0) // Asegúrate de que el personaje está cayendo
         {
             zorroAnimator.SetTrigger("IsJumping");
-
+            SfxScript.TriggerSfx("SfxJump");
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
                 // Ajusta la velocidad vertical directamente para evitar acumulación
                 if (this.gameObject.tag == "Trampoline")
                 {
+                    SfxScript.TriggerSfx("SfxTrampoline");
                     rb.velocity = new Vector2(rb.velocity.x, jumpForce * 1.5f);
-                    platformAnimator.SetTrigger("IsJumping");
                 }
                 else
                 {
@@ -95,7 +102,6 @@ public class Platform : MonoBehaviour
                 }
                 if (isFallingPlatform && !isFalling)
                 {
-
                     StartFalling();
                 }
             }
@@ -105,8 +111,37 @@ public class Platform : MonoBehaviour
     private void StartFalling()
     {
         isFalling = true; // Marca la plataforma como cayendo
+        SfxScript.TriggerSfx("SfxFalling");
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>(); // Agrega un Rigidbody2D para simular la caída
         rb.gravityScale = 2f; // Ajusta la gravedad para una caída más rápida
         rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Congela la rotación para evitar que gire
+        // Detén el sonido de "helix" al iniciar la caída
+        if (audioSource.isPlaying)
+        {
+            this.audioSource.Stop();
+            this.GetComponent<AudioSource>().enabled = false;
+        }
+    }
+
+    private void HandleHelixSfx()
+    {
+        // Convierte la posición de la plataforma al espacio de la pantalla (viewport)
+        Vector3 screenPosition = mainCamera.WorldToViewportPoint(transform.position);
+
+        // Reproduce o detiene el sonido "helix" basado en la posición y estado de la plataforma
+        if (!isFalling && screenPosition.x > 0 && screenPosition.x < 1 && screenPosition.y > 0 && screenPosition.y < 1)
+        {
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
     }
 }
