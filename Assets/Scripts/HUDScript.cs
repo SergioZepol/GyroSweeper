@@ -128,6 +128,10 @@ public class HUDScript : MonoBehaviour
         SfxScript.TriggerSfx("SfxButton1");
         SceneManager.LoadScene("MainMenuScene");
         Time.timeScale = 1f;
+        // Guarda el puntaje actual
+        SaveScore(highestScore);
+
+        textDead.text = "Your Score\n was: " + highestScore;
     }
 
     public void Replay()
