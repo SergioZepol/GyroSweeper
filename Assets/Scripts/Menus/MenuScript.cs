@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
-{
-    public void PlayButton()
+{    public void PlayButton()
     {
         SfxScript.TriggerSfx("SfxButton1");
         SceneManager.LoadScene("GameScene");

@@ -1371,6 +1371,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxButton1: {fileID: 8300000, guid: 80e5940f07c99bf4cb93b20e9fad5d73, type: 3}
+  sfxDead: {fileID: 8300000, guid: a1e40741af6b24b4eb154d5b9f19af75, type: 3}
+  sfxJump: {fileID: 8300000, guid: b52462bfbc3741f41a111cce1297db1c, type: 3}
+  sfxTrampoline: {fileID: 8300000, guid: b9c7824a93da2f64abb2118bacd90a4e, type: 3}
+  sfxFalling: {fileID: 8300000, guid: 6194b78993fdc704d837844e86b99c50, type: 3}
+  sfxHelix: {fileID: 8300000, guid: 816ac6b8397a99d46b4abe39a8099251, type: 3}
 --- !u!82 &1969152200
 AudioSource:
   m_ObjectHideFlags: 0

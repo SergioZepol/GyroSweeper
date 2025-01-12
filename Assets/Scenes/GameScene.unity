@@ -1786,6 +1786,7 @@ MonoBehaviour:
   MuteObject: {fileID: 932072729}
   UnMuteObject: {fileID: 1897944175}
   deadObject: {fileID: 493335190}
+  deadMusic: {fileID: 8300000, guid: 217237f03a3058e48be1b295f322b9bf, type: 3}
 --- !u!1 &676536929
 GameObject:
   m_ObjectHideFlags: 0

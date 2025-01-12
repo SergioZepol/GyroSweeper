@@ -113,7 +113,13 @@ public class PlayerController : MonoBehaviour
     private void Dead()
     {
         dead = true;
-        hud.DeadScreen();
+        SfxScript.TriggerSfx("SfxDead");
+        StartCoroutine(HandleDeathScreen()); // Iniciar corutina
+    }
+    private IEnumerator HandleDeathScreen()
+    {
+        yield return new WaitForSeconds(1f); // Esperar 1 segundo (ajusta el tiempo según sea necesario)
+        hud.DeadScreen(); // Mostrar la pantalla de muerte después del retraso
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
