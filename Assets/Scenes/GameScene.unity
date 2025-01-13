@@ -4470,7 +4470,7 @@ MonoBehaviour:
     probability: 0.2
   - prefab: {fileID: 7093744767675706617, guid: e9a3ab8dd6a8d8b4993c800f001a0c43, type: 3}
     probability: 0.05
-  - prefab: {fileID: 3201737328217520760, guid: 74d396d9bee2e6342b7dc1da9f375441, type: 3}
+  - prefab: {fileID: 2703955526101432938, guid: 417942460cb869742a94e32b8b70337f, type: 3}
     probability: 0.02
   - prefab: {fileID: 1121032369105242200, guid: 392e92587b08e0c42894acddd31129fc, type: 3}
     probability: 0.15
