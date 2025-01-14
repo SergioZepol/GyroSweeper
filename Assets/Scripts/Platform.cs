@@ -46,12 +46,6 @@ public class Platform : MonoBehaviour
         // Controla el sonido de "helix"
         if (isFallingPlatform)
         {
-            if (!animada)
-            {
-                Animator platformAnimator = this.GetComponent<Animator>();
-                platformAnimator.SetTrigger("Idle");
-                animada = true;
-            }
             HandleHelixSfx();
         }
     }
@@ -120,6 +114,12 @@ public class Platform : MonoBehaviour
 
     private void StartFalling()
     {
+        if (!animada)
+        {
+            Animator platformAnimator = this.GetComponent<Animator>();
+            platformAnimator.SetTrigger("IsFalling");
+            animada = true;
+        }
         isFalling = true; // Marca la plataforma como cayendo
         SfxScript.TriggerSfx("SfxFalling");
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>(); // Agrega un Rigidbody2D para simular la caída

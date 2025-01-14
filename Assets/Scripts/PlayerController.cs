@@ -74,16 +74,27 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector2 velocity = rb.velocity;
-        velocity.x = moveX;
-
-        // Si está en la zona del ventilador y se activa (por soplo o clic/toque), añadir fuerza hacia arriba
-        if (isInFanZone && (isBlowing || isFanActivated))
+        if (!dead)
         {
-            velocity.y = fanLiftForce;
-        }
+            Vector2 velocity = rb.velocity;
+            velocity.x = moveX;
 
-        rb.velocity = velocity;
+            // Si está en la zona del ventilador y se activa (por soplo o clic/toque), añadir fuerza hacia arriba
+            if (isInFanZone && (isBlowing || isFanActivated))
+            {
+                velocity.y = fanLiftForce;
+            }
+
+            rb.velocity = velocity;
+        }
+        else
+        {
+            Vector2 velocity;
+            velocity.x = 0;
+            velocity.y = 0;
+            rb.velocity = velocity;
+            rb.gravityScale = 0;
+        }
     }
 
     private void CheckScreenBounds()
@@ -113,6 +124,8 @@ public class PlayerController : MonoBehaviour
     private void Dead()
     {
         dead = true;
+        Animator animator = GetComponent<Animator>();
+        animator.SetTrigger("IsDead");
         SfxScript.TriggerSfx("SfxDead");
         StartCoroutine(HandleDeathScreen()); // Iniciar corutina
     }
@@ -120,6 +133,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(1f); // Esperar 1 segundo (ajusta el tiempo según sea necesario)
         hud.DeadScreen(); // Mostrar la pantalla de muerte después del retraso
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

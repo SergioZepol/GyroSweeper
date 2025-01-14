@@ -10,13 +10,6 @@ public class SpikeBall : MonoBehaviour
 
     void Start()
     {
-        // Validar que haya puntos asignados
-        if (points.Length == 0)
-        {
-            Debug.LogError("No se han asignado puntos al script SpikeBall.");
-            return;
-        }
-
         // Posicionar la bola en el primer punto
         transform.position = points[currentPointIndex].position;
     }
