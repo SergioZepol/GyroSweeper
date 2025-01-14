@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +16,8 @@ public class GameManager : MonoBehaviour
     public float spawnInterval = 0.1f; // Intervalo más rápido para generar plataformas
     public float minYDistance = 1f; // Distancia mínima vertical entre plataformas
     public float maxYDistance = 2f; // Distancia máxima vertical entre plataformas
+
+    private bool spawnAnother = false;
 
     private float lastSpawnY = -3.5f; // Última posición Y donde se generó una plataforma
     private Transform cameraTransform;
@@ -74,12 +75,27 @@ public class GameManager : MonoBehaviour
 
         if (selectedPlatform.CompareTag("Spikes"))
         {
+            spawnAnother = true;
             spawnPosition.x = 0;
         }
-            GameObject platform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
-
+        
+        GameObject platform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
 
         activePlatforms.Add(platform);
+
+        if (spawnAnother)
+        {
+            selectedPlatform = SelectRandomPlatform();
+            spawnPosition.x = Random.Range(minX, maxX);
+            while (selectedPlatform.CompareTag("Spikes") == true)
+            {
+                selectedPlatform = SelectRandomPlatform();
+            }
+            platform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
+
+            activePlatforms.Add(platform);
+            spawnAnother = false;
+        }
 
         lastSpawnY = spawnPosition.y;
     }
