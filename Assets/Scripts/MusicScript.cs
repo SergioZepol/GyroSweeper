@@ -69,6 +69,30 @@ public class MusicScript : MonoBehaviour
         PlayMusicForScene(scene.name);
     }
 
+    public void ChangeMusic()
+    {
+        AudioClip clipToPlay = null;
+        AudioClip[] gameMusicClips = new AudioClip[]
+{
+                gameMusic1, gameMusic2, gameMusic3, gameMusic4,
+                gameMusic5, gameMusic6, gameMusic7, gameMusic8
+};
+
+        // Seleccionar un clip aleatorio de la lista
+        int randomIndex = Random.Range(0, gameMusicClips.Length);
+        clipToPlay = gameMusicClips[randomIndex];
+        // Verifica si el clip a reproducir es el mismo que ya está en el AudioSource
+        if (clipToPlay != null && Source.clip != clipToPlay)
+        {
+            // Asignar y reproducir la música
+            Source.clip = clipToPlay;
+            Source.Play();
+
+            // Siempre hacemos el fade in cuando se cambia la música
+            StartCoroutine(FadeIn(Source, fadeInDuration));
+        }
+    }
+
     // Método para ambiar la música en función de la escena
     void PlayMusicForScene(string sceneName)
     {
@@ -106,14 +130,6 @@ public class MusicScript : MonoBehaviour
 
             // Siempre hacemos el fade in cuando se cambia la música
             StartCoroutine(FadeIn(Source, fadeInDuration));
-        }
-        else if (clipToPlay == null)
-        {
-            //Debug.LogWarning($"No se encontró música para la escena {sceneName}");
-            if (sceneName == "BossRoom")
-            {
-                Source.clip = null;
-            }
         }
     }
 

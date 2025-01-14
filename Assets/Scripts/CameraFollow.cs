@@ -16,9 +16,21 @@ public class CameraFollow : MonoBehaviour
     private Coroutine fadeCoroutine; // Para asegurarnos de no ejecutar múltiples fades al mismo tiempo
     private bool isFirstBackground = true; // Control para evitar fade en el primer fondo
 
+    private MusicScript musicScript; // Referencia al MusicScript
+
 
     private void Start()
     {
+        // Buscar el objeto llamado "AudioSource(Music)" y obtener su componente MusicScript
+        GameObject musicObject = GameObject.Find("AudioSource(Music)");
+        if (musicObject != null)
+        {
+            musicScript = musicObject.GetComponent<MusicScript>();
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'AudioSource(Music)' en la escena.");
+        }
         if (backgroundSprites.Length > 0)
         {
             // Configurar el primer fondo y el primer umbral
@@ -51,23 +63,26 @@ public class CameraFollow : MonoBehaviour
 
     private void ChangeBackground(int index, bool instant = false)
     {
-        // Cambiar el sprite del fondo con o sin fade
         if (backgroundRenderer != null && index < backgroundSprites.Length)
         {
             if (instant || isFirstBackground)
             {
-                // Cambiar de forma instantánea
                 backgroundRenderer.sprite = backgroundSprites[index];
                 SetAlpha(1f);
                 isFirstBackground = false;
             }
             else
             {
-                // Iniciar el fade out y fade in
                 if (fadeCoroutine != null)
                     StopCoroutine(fadeCoroutine);
 
                 fadeCoroutine = StartCoroutine(FadeBackground(index));
+            }
+
+            // Cambia la música cuando cambia el fondo
+            if (musicScript != null)
+            {
+                musicScript.ChangeMusic();
             }
         }
         else

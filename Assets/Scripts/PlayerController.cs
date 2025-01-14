@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1f;
         rb = GetComponent<Rigidbody2D>();
         originalScale = transform.localScale; // Guardamos el tamaño original
-
+        /*
         // Configurar el micrófono
         if (Microphone.devices.Length > 0)
         {
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("No se detectó ningún micrófono.");
         }
+        */
     }
 
     void Update()
@@ -65,10 +66,10 @@ public class PlayerController : MonoBehaviour
             CheckScreenBounds(); // Verificar si el personaje se sale de los límites
 
             // Detectar si el usuario está soplando al micrófono
-            isBlowing = CheckBlowing();
+            //isBlowing = CheckBlowing();
 
             // Detectar clic o toque sobre objetos "Fan"
-            DetectFanClickOrTouch();
+            //DetectFanClickOrTouch();
         }
     }
 
