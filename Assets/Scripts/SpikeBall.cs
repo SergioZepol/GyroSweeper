@@ -7,6 +7,8 @@ public class SpikeBall : MonoBehaviour
     public Transform[] points; // Array de puntos (esquinas del camino)
     public float moveSpeed = 3f; // Velocidad de movimiento
     private int currentPointIndex = 0; // Índice del punto actual
+    public float rotationSpeed = -180f; // Velocidad de rotación en grados por segundo
+
 
     void Start()
     {
@@ -20,6 +22,9 @@ public class SpikeBall : MonoBehaviour
 
         // Mover la bola hacia el siguiente punto
         MoveTowardsNextPoint();
+
+        RotateSpikeBall();
+
     }
 
     private void MoveTowardsNextPoint()
@@ -36,5 +41,11 @@ public class SpikeBall : MonoBehaviour
             // Avanzar al siguiente punto (en bucle)
             currentPointIndex = (currentPointIndex + 1) % points.Length;
         }
+    }
+
+    private void RotateSpikeBall()
+    {
+        // Rotar la bola continuamente alrededor del eje Z
+        transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
     }
 }
