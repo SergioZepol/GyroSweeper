@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 10f;
-    public float fanLiftForce = 20f; // Fuerza de elevación del ventilador
+    //public float fanLiftForce = 20f; // Fuerza de elevación del ventilador
     public Rigidbody2D rb;
     public HUDScript hud;
     private bool dead = false;
 
     private float moveX;
     private Vector3 originalScale;
-    private bool isInFanZone = false; // Indica si está en la zona del ventilador
+    //private bool isInFanZone = false; // Indica si está en la zona del ventilador
     private string microphoneDevice;
     private AudioClip micClip;
     private bool isBlowing = false;
-    private bool isFanActivated = false; // Nuevo: Indica si el ventilador está activado por clic/toque
+    //private bool isFanActivated = false; // Nuevo: Indica si el ventilador está activado por clic/toque
 
     void Awake()
     {
@@ -80,11 +80,13 @@ public class PlayerController : MonoBehaviour
             Vector2 velocity = rb.velocity;
             velocity.x = moveX;
 
+            /*
             // Si está en la zona del ventilador y se activa (por soplo o clic/toque), añadir fuerza hacia arriba
             if (isInFanZone && (isBlowing || isFanActivated))
             {
                 velocity.y = fanLiftForce;
             }
+            */
 
             rb.velocity = velocity;
         }
@@ -144,7 +146,7 @@ public class PlayerController : MonoBehaviour
             Dead();
         }
     }
-
+    /*
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("FanAir"))
@@ -160,7 +162,7 @@ public class PlayerController : MonoBehaviour
             isInFanZone = false; // Salimos de la zona del ventilador
         }
     }
-
+    */
     private bool CheckBlowing()
     {
         if (micClip == null || !Microphone.IsRecording(microphoneDevice)) return false;
@@ -191,7 +193,7 @@ public class PlayerController : MonoBehaviour
         // Determinar si se está soplando
         return averageAmplitude > 0.1f; // Umbral ajustable
     }
-
+    /*
     private void DetectFanClickOrTouch()
     {
         if (Input.GetMouseButtonDown(0)) // Detectar clic en PC
@@ -227,7 +229,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Tiempo que el ventilador estará activado
         isFanActivated = false;
     }
-
     private void OnDestroy()
     {
         if (Microphone.IsRecording(microphoneDevice))
@@ -235,4 +236,5 @@ public class PlayerController : MonoBehaviour
             Microphone.End(microphoneDevice); // Detener el micrófono al cerrar el juego
         }
     }
+            */
 }
