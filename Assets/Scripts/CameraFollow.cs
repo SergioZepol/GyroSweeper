@@ -7,7 +7,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target; // El jugador u objetivo al que seguirá la cámara
     public SpriteRenderer backgroundRenderer; // Referencia al SpriteRenderer del background
     public Sprite[] backgroundSprites; // Array para almacenar los diferentes sprites de fondo
-    public float heightInterval = 50f; // Intervalo de altura para cambiar de fondo
+    public float heightInterval = 75f; // Intervalo de altura para cambiar de fondo
     public float fadeDuration = 1f; // Duración del fade in y fade out
 
 

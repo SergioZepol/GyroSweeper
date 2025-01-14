@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpikeBall : MonoBehaviour
 {
     public Transform[] points; // Array de puntos (esquinas del camino)
-    public float moveSpeed = 5f; // Velocidad de movimiento
+    public float moveSpeed = 3f; // Velocidad de movimiento
     private int currentPointIndex = 0; // Índice del punto actual
 
     void Start()
