@@ -632,7 +632,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  fanLiftForce: 20
   rb: {fileID: 0}
   hud: {fileID: 643213700}
 --- !u!95 &217688315

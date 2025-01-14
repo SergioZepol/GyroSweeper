@@ -125,6 +125,8 @@ public class Platform : MonoBehaviour
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>(); // Agrega un Rigidbody2D para simular la caída
         rb.gravityScale = 2f; // Ajusta la gravedad para una caída más rápida
         rb.constraints = RigidbodyConstraints2D.FreezeRotation; // Congela la rotación para evitar que gire
+        EdgeCollider2D ec = gameObject.GetComponent<EdgeCollider2D>();
+        ec.enabled = false;
         // Detén el sonido de "helix" al iniciar la caída
         if (audioSource.isPlaying)
         {
