@@ -1522,13 +1522,11 @@ MonoBehaviour:
   target: {fileID: 217688313}
   backgroundRenderer: {fileID: 1751321577}
   backgroundSprites:
-  - {fileID: 21300000, guid: ba9d476dea6f83f448882b03734e7beb, type: 3}
-  - {fileID: 21300000, guid: 42407fbae6ab6d148aed6967b7fcd779, type: 3}
-  - {fileID: 21300000, guid: 6c38526684b1ad842a9752ba74fb083f, type: 3}
-  - {fileID: 21300000, guid: 05060a86883a9824a92cafc51c583cb1, type: 3}
-  - {fileID: 21300000, guid: 9e97176b182f8ed41a56b1bb031468db, type: 3}
-  - {fileID: 21300000, guid: fdc545031ba7eca4bb4ed668e57d7f9f, type: 3}
-  - {fileID: 21300000, guid: 5d26e20d70326cb4b866fbe212d8db8b, type: 3}
+  - {fileID: 21300000, guid: 52b5a5881ddcd3c4e999a0751cbbd37c, type: 3}
+  - {fileID: 21300000, guid: b35eb4880dae09a438ae84389eabbb94, type: 3}
+  - {fileID: 21300000, guid: 0b9345c6eefa2aa4583f8f33347f7fb1, type: 3}
+  - {fileID: 21300000, guid: 14e4181a0e5b2724792e30e78ae3aa5f, type: 3}
+  - {fileID: 21300000, guid: afd586c111d698745920d16f0aa9cbba, type: 3}
   heightInterval: 75
   fadeDuration: 1
 --- !u!1 &582119787
@@ -3965,7 +3963,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: ba9d476dea6f83f448882b03734e7beb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52b5a5881ddcd3c4e999a0751cbbd37c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
