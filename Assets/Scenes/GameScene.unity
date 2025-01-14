@@ -1520,6 +1520,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 217688313}
+  backgroundRenderer: {fileID: 1751321577}
+  backgroundSprites:
+  - {fileID: 21300000, guid: ba9d476dea6f83f448882b03734e7beb, type: 3}
+  - {fileID: 21300000, guid: 42407fbae6ab6d148aed6967b7fcd779, type: 3}
+  - {fileID: 21300000, guid: 6c38526684b1ad842a9752ba74fb083f, type: 3}
+  - {fileID: 21300000, guid: 05060a86883a9824a92cafc51c583cb1, type: 3}
+  - {fileID: 21300000, guid: 9e97176b182f8ed41a56b1bb031468db, type: 3}
+  - {fileID: 21300000, guid: fdc545031ba7eca4bb4ed668e57d7f9f, type: 3}
+  - {fileID: 21300000, guid: 5d26e20d70326cb4b866fbe212d8db8b, type: 3}
+  heightInterval: 75
+  fadeDuration: 1
 --- !u!1 &582119787
 GameObject:
   m_ObjectHideFlags: 0
@@ -4478,6 +4489,8 @@ MonoBehaviour:
     probability: 0.15
   - prefab: {fileID: 1751879420179160715, guid: 8430dcb73cd3464428f0cd332aff30bf, type: 3}
     probability: 0.15
+  - prefab: {fileID: 8514455416839025460, guid: dbb7162742d92c64186ce833de7c00ab, type: 3}
+    probability: 0.05
   initialPlatformCount: 20
   spawnInterval: 1
   minYDistance: 1

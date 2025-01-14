@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -71,7 +72,13 @@ public class GameManager : MonoBehaviour
         // Seleccionar una plataforma aleatoriamente según la probabilidad
         GameObject selectedPlatform = SelectRandomPlatform();
 
-        GameObject platform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
+        if (selectedPlatform.CompareTag("Spikes"))
+        {
+            spawnPosition.x = 0;
+        }
+            GameObject platform = Instantiate(selectedPlatform, spawnPosition, Quaternion.identity);
+
+
         activePlatforms.Add(platform);
 
         lastSpawnY = spawnPosition.y;
